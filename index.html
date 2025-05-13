@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Untuk Kamu ❤️</title>
+    <style>
+        body {
+            background: linear-gradient(270deg, #ffcccc, #ffe6e6, #ffd6e0, #ffe6f2);
+            background-size: 800% 800%;
+            animation: gradientShift 20s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            flex-direction: column;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        #clickBtn {
+            padding: 15px 30px;
+            background-color: #e6005c;
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 0 15px #ff66a3;
+        }
+
+        #clickBtn:hover {
+            background-color: #cc0052;
+        }
+
+        #mainContent {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #e6005c;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid;
+            width: 0;
+            animation: typing 3s steps(12), blink 0.5s step-end infinite alternate, pulse 2s infinite;
+            text-shadow: 0 0 10px #ff80bf, 0 0 20px #ff66a3;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 12ch
+            }
+        }
+
+        @keyframes blink {
+            from {
+                border-color: transparent
+            }
+
+            to {
+                border-color: black
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+        }
+
+        .heart {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            background: red;
+            transform: rotate(45deg);
+            animation: float 4s ease-in infinite;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            width: 20px;
+            height: 20px;
+            background: red;
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: -10px;
+            top: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1) rotate(45deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-300px) scale(1.5) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        .gombal {
+            margin-top: 30px;
+            font-size: 1.3rem;
+            text-align: center;
+            color: #99004d;
+            max-width: 600px;
+            opacity: 0;
+            animation: zoomIn 2s ease-out forwards;
+            animation-delay: 4s;
+        }
+
+        @keyframes zoomIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        audio {
+            display: none;
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #ff3399;
+            top: -10px;
+            z-index: 999;
+            animation: confetti-fall 5s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="clickBtn">Click Me 💖</button>
+
+    <div id="mainContent">
+        <h1>I Love U</h1>
+        <div class="hearts" id="heartsContainer"></div>
+
+        <img src="kiwkiw.jpg" alt="Foto Cewekku" style="width: 180px; border-radius: 15px; margin-top: 20px; box-shadow: 0 0 15px pink;" />
+
+        <p class="gombal">
+            SELAMAT ULANG TAHUN SAYANG 🥳<br />
+            Lopekkk✨<br />
+            Semoga bahagia terus!!! 💕<br />
+            Tuhan memberkati selalu, aminn
+        </p>
+
+        <audio id="loveMusic" autoplay loop>
+            <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        const clickBtn = document.getElementById("clickBtn");
+        const mainContent = document.getElementById("mainContent");
+        const loveMusic = document.getElementById("loveMusic");
+        const heartsContainer = document.getElementById("heartsContainer");
+
+        clickBtn.addEventListener("click", function () {
+            clickBtn.style.display = "none";
+            mainContent.style.display = "flex";
+            loveMusic.play();
+
+            // Hati-hati
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (2 + Math.random() * 2) + 's';
+                heartsContainer.appendChild(heart);
+                setTimeout(() => heart.remove(), 4000);
+            }, 300);
+
+            // Confetti
+            setInterval(() => {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                confetti.style.animationDuration = `${2 + Math.random() * 3}s`;
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 5000);
+            }, 200);
+        });
+    </script>
+
+</body>
+
+</html>
